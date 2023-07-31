@@ -3,6 +3,7 @@ import ContactForm from './ContactForm/ContactForm';
 import ContactList from './ContactList/ContactList';
 import { nanoid } from 'nanoid';
 import Filter from './Filter/Filter';
+import { Container } from './App.styled';
 
 class App extends Component {
   state = {
@@ -51,7 +52,7 @@ class App extends Component {
   componentDidMount() {
     const stringifiedContacts = localStorage.getItem('contacts');
     const constants = JSON.parse(stringifiedContacts) ?? [];
-    this.setState({ constants });
+    this.setState({ contacts: constants });
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -65,7 +66,7 @@ class App extends Component {
     const filteredContacts = this.getFilteredContacts();
 
     return (
-      <div>
+      <Container>
         <h1>Phonebook</h1>
         <ContactForm onAddContact={this.onHandleAddContact} />
 
@@ -75,7 +76,7 @@ class App extends Component {
           contacts={filteredContacts}
           onDeleteContact={this.onHandleDeleteContact}
         />
-      </div>
+      </Container>
     );
   }
 }
